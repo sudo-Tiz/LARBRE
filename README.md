@@ -4,6 +4,8 @@ LARBRE contains documentation and scripts for installing arch linux encrypted wi
 
 ## First steps
 
+Follow the [documentation](/install_arch.md) to install arch linux with (optionnal) full disk encryption
+
 ## Xorg
 
 An automated script called [larbs.sh](/larbs.sh) (created by [Luke Smith](https://github.com/LukeSmithxyz/LARBS)) can be used to install an desktop environment based on theses [dotfiles](https://github.com/sudo-Tiz/dotfiles).
