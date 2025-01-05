@@ -222,7 +222,7 @@ Exec=/usr/local/lib/arkenfox-auto-update" >/etc/pacman.d/hooks/arkenfox.hook
 }
 
 installffaddons() {
-  addonlist="ublock-origin decentraleyes istilldontcareaboutcookies vim-vixen"
+  addonlist="ublock-origin istilldontcareaboutcookies vimium-ff darkreader"
   addontmp="$(mktemp -d)"
   trap "rm -fr $addontmp" HUP INT QUIT TERM PWR EXIT
   IFS=' '
@@ -241,10 +241,6 @@ installffaddons() {
     mv "$file" "$pdir/extensions/$id.xpi"
   done
   chown -R "$name:$name" "$pdir/extensions"
-  # Fix a Vim Vixen bug with dark mode not fixed on upstream:
-  sudo -u "$name" mkdir -p "$pdir/chrome"
-  [ ! -f "$pdir/chrome/userContent.css" ] && sudo -u "$name" echo ".vimvixen-console-frame { color-scheme: light !important; }
-#category-more-from-mozilla { display: none !important }" >"$pdir/chrome/userContent.css"
 }
 
 finalize() {
@@ -340,7 +336,7 @@ sudo -u "$name" mkdir -p "/home/$name/.config/mpd/playlists/"
 dbus-uuidgen >/var/lib/dbus/machine-id
 
 # Use system notifications for Brave on Artix
-echo "export \$(dbus-launch)" >/etc/profile.d/dbus.sh
+# echo "export \$(dbus-launch)" >/etc/profile.d/dbus.sh
 
 # Enable tap to click
 [ ! -f /etc/X11/xorg.conf.d/40-libinput.conf ] && printf 'Section "InputClass"
@@ -351,6 +347,22 @@ echo "export \$(dbus-launch)" >/etc/profile.d/dbus.sh
 	# Enable left mouse button by tapping
 	Option "Tapping" "on"
 EndSection' >/etc/X11/xorg.conf.d/40-libinput.conf
+
+#Enable pam autologin  and gnome_keyring
+cp /etc/pam.d/login /etc/pam.d/login.bak
+cat <<EOL >/etc/pam.d/login
+#%PAM-1.0
+
+auth       required     pam_autologin.so
+auth       required     pam_securetty.so
+auth       requisite    pam_nologin.so
+auth       include      system-local-login
+auth       optional     pam_gnome_keyring.so
+account    include      system-local-login
+session    include      system-local-login
+session    optional     pam_gnome_keyring.so auto_start
+EOL
+touch /etc/security/autologin.conf
 
 # All this below to get Librewolf installed with add-ons and non-bad settings.
 
