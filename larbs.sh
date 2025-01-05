@@ -333,7 +333,7 @@ sudo -u "$name" mkdir -p "/home/$name/.config/abook/"
 sudo -u "$name" mkdir -p "/home/$name/.config/mpd/playlists/"
 
 # dbus UUID must be generated for Artix runit.
-dbus-uuidgen >/var/lib/dbus/machine-id
+# dbus-uuidgen >/var/lib/dbus/machine-id
 
 # Use system notifications for Brave on Artix
 # echo "export \$(dbus-launch)" >/etc/profile.d/dbus.sh
@@ -348,7 +348,7 @@ dbus-uuidgen >/var/lib/dbus/machine-id
 	Option "Tapping" "on"
 EndSection' >/etc/X11/xorg.conf.d/40-libinput.conf
 
-#Enable pam autologin  and gnome_keyring
+# Enable pam autologin  and gnome_keyring
 cp /etc/pam.d/login /etc/pam.d/login.bak
 cat <<EOL >/etc/pam.d/login
 #%PAM-1.0
