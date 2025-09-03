@@ -61,7 +61,7 @@ G,https://github.com/user/repo.git,"is a git program"
 
 ## Other Versions
 
-- **Xorg branch:** For X11 users, check the [xorg branch](https://github.com/sudo-Tiz/LARBRE/tree/xorg) with my previous configuration
+- **Xorg branch:** For X11 users, check the [xorg branch](https://github.com/sudo-Tiz/LARBRE/tree/Xorg) with my previous configuration
 
 ## Credits
 
