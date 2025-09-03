@@ -231,7 +231,20 @@ If something bad happens, you can restore the backup header:
 
     sudo cryptsetup luksHeaderRestore /dev/<your-disk-luks> --header-backup-file /path/to/backup_header_file
 
-### Drivers
+## Set Hibernation using swapfile
+### Set Swapfile
+    mkswap -U clear --size 10G --file /swapfile
+    swapon /swapfile
+    echo '/swapfile none swap defaults 0 0' | sudo tee -a /etc/fstab
+### Set initramfs hook
+    echo 'HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block plymouth encrypt filesystems resume fsck)' | sudo tee /etc/mkinitcpio.conf.d/99-hooks.conf
+    sudo mkinitcpio -P
+### Pass hibernate location to initramfs
+    sudo sed -i "s|^GRUB_CMDLINE_LINUX_DEFAULT=\".*\"|GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet splash resume=UUID=$(sudo blkid /dev/mapper/root -o value -s UUID) resume_offset=$(sudo filefrag -v /swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}')\"|" /etc/default/grub
+    sudo grub-mkconfig -o /boot/grub/grub.cfg
+
+
+## Install drivers
 
 **Intel**:
 
@@ -241,29 +254,14 @@ If something bad happens, you can restore the backup header:
 
     sudo pacman -S nvidia
 
-VirtualBox:
+**VirtualBox**:
 
     sudo pacman -S virtualbox-guest-utils
 
-### Beautify Pacman
+## Run LERBRE to install Desktop Environment
 
-    sudo nvim /etc/pacman.conf
-
-Uncomment `Color` and add below it `ILoveCandy`.
-
-If you have a good internet connection, you can uncomment the option `ParallelDownloads = 5`.
-
-### GTK Dark Theme
-
-To make GTK applications (e.g. _nemo_) use dark theme, execute the following commands:
-
-    gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
-    gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-
-## Run LARBS to install Desktop Environment
-
-You can now install a Desktop Environment manually or run larbs.sh to install mine (see [dotfiles](https://github.com/sudo-Tiz/dotfiles))
+You can now install a Desktop Environment manually or run larbre.sh to install mine (see [dotfiles](https://github.com/sudo-Tiz/dotfiles))
 
     sudo su
-    curl -LO https://raw.githubusercontent.com/sudo-Tiz/LARBRE/main/larbs.sh
-    sh larbs.sh
+    curl -LO https://raw.githubusercontent.com/sudo-Tiz/LARBRE/main/larbre.sh
+    sh larbre.sh
