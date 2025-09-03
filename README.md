@@ -23,7 +23,7 @@ Automated post-installation script for Arch Linux that installs and configures a
 
 ## Included Software
 
-- **Desktop:** Hyprland, Waybar, Wofi
+- **Desktop:** Hyprland, [Tsumiki](https://github.com/rubiin/tsumiki), Wofi
 - **Terminal:** Foot, Zsh with Powerlevel10k
 - **Editor:** Neovim
 - **Browser:** Firefox, Brave, Qutebrowser
