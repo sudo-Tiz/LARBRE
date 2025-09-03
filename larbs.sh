@@ -7,7 +7,7 @@
 ### OPTIONS AND VARIABLES ###
 
 dotfilesrepo="https://github.com/sudo-Tiz/dotfiles.git"
-progsfile="https://raw.githubusercontent.com/sudo-Tiz/LARBRE/main/progs.csv"
+progsfile="https://raw.githubusercontent.com/sudo-Tiz/LARBRE/Xorg/progs.csv"
 aurhelper="yay"
 repobranch="master"
 export TERM=ansi
