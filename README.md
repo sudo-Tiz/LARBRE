@@ -8,7 +8,7 @@ Follow the [documentation](/install_arch.md) to install arch linux with (optionn
 
 ## Xorg
 
-An automated script called [larbs.sh](/larbs.sh) (created by [Luke Smith](https://github.com/LukeSmithxyz/LARBS)) can be used to install an desktop environment based on theses [dotfiles](https://github.com/sudo-Tiz/dotfiles).
+An automated script called [larbs.sh](/larbs.sh) (created by [Luke Smith](https://github.com/LukeSmithxyz/LARBS)) can be used to install a Xorg desktop environment based on theses [dotfiles](https://github.com/sudo-Tiz/dotfiles).
 
 Run blindfolded or read the [documentation](/larbs.md)
 
