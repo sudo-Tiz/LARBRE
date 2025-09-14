@@ -89,6 +89,10 @@ A,iio-hyprland-git,"is a daemon to enable automatic rotation using iio-proxy-sen
 A,pam_autologin,"is a PAM autologin module"
 ,rust,"is a multi-paradigm, general-purpose programming language"
 ,sccache,"is a ccache-like tool i use for rust"
+G,git@github.com:sudo-Tiz/minecraft-plymouth-theme.git,"is a minecraft plymouth theme"
+G,git@github.com:sudo-Tiz/minegrub-theme.git,"is a minecraft grub theme"
+# Probably not usefull for you
+G,git@github.com:sudo-Tiz/asus-numpad.git,"is a numpud trackpad driver for asus laptops"
 
 # CLI Tools
 ,bat,"is a cat clone with syntax highlighting"
