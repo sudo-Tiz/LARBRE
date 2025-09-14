@@ -22,18 +22,19 @@ Automated post-installation script for Arch Linux that installs and configures a
 - Sets up my personal [dotfiles](https://github.com/sudo-Tiz/dotfilesV2)
 - Configures battery monitoring for laptops
 - Sets up secure DNS and network privacy
+- Set up Minecraft theme for GRUB and Plymouth
 
 ## Included Software
 
 - **Desktop:** Hyprland, [Ashell](https://github.com/MalpenZibo/ashell), Wofi
 - **Terminal:** Foot, Zsh with Powerlevel10k
 - **Editor:** Neovim
-- **Browser:** Firefox, Brave, Qutebrowser
+- **Browser:** Qutebrowser, Firefox, Brave
 - **Media:** MPV, Mixxx, Reaper
 - **Development:** Git, Docker, VSCodium, Ansible
 - **Games:** Steam, Luanti
 
-Full list in [progsV2.csv](progsV2.csv).
+Full list in [progs.csv](progs.csv).
 
 ## Requirements
 
@@ -55,12 +56,12 @@ The package list uses 3 columns:
 ```
 TAG,PACKAGE,DESCRIPTION
 ,firefox,"is a web browser"
-A,yay,"is an AUR helper" 
+A,yay,"is an AUR helper"
 G,https://github.com/user/repo.git,"is a git program"
 ```
 
 - Empty TAG = Official repository
-- `A` = AUR package  
+- `A` = AUR package
 - `G` = Git repository (make install)
 
 ## Other Versions
@@ -70,4 +71,3 @@ G,https://github.com/user/repo.git,"is a git program"
 ## Credits
 
 Based on [LARBS](https://github.com/LukeSmithxyz/LARBS) by Luke Smith. Special thanks to Luke for creating the original auto-rice bootstrapping concept that highly inspired this project.
-
