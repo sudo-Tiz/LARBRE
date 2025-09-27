@@ -7,7 +7,7 @@
 ### OPTIONS AND VARIABLES ###
 
 dotfilesrepo="https://github.com/sudo-Tiz/dotfilesV2.git"
-progsfile="https://raw.githubusercontent.com/sudo-Tiz/LARBRE/main/progsV2.csv"
+progsfile="https://raw.githubusercontent.com/sudo-Tiz/LARBRE/main/progs.csv"
 aurhelper="yay"
 repobranch="master"
 export TERM=ansi
@@ -28,7 +28,7 @@ error() {
 
 welcomemsg() {
   whiptail --title "Welcome!" \
-    --msgbox "Welcome to Luke's Auto-Rice Bootstrapping Script!\\n\\nThis script will automatically install a fully-featured Linux desktop, which I use as my main machine.\\n\\n-Luke" 10 60
+    --msgbox "This script will automatically install a fully-featured Linux desktop, which I use as my main machine." 10 60
 
   whiptail --title "Important Note!" --yes-button "All ready!" \
     --no-button "Return..." \
@@ -175,7 +175,7 @@ setupbatterycheck() {
   whiptail --infobox "Setting up battery monitoring..." 7 50
 
   # Create battery check script
-  cat << EOF > /usr/local/bin/check_battery
+  cat <<EOF >/usr/local/bin/check_battery
 #!/bin/bash
 BATTERY_PATH="$BATTERY_PATH"
 battery_percentage=\$(cat "\$BATTERY_PATH/capacity")
@@ -204,7 +204,7 @@ EOF
   chmod +x /usr/local/bin/check_battery
 
   # Create systemd service
-  cat << 'EOF' > /etc/systemd/system/battery-monitor.service
+  cat <<'EOF' >/etc/systemd/system/battery-monitor.service
 [Unit]
 Description=Battery Monitor
 
@@ -213,7 +213,7 @@ Type=oneshot
 ExecStart=/usr/local/bin/check_battery
 EOF
 
-  cat << 'EOF' > /etc/systemd/system/battery-monitor.timer
+  cat <<'EOF' >/etc/systemd/system/battery-monitor.timer
 [Unit]
 Description=Battery Monitor Timer
 
@@ -332,6 +332,14 @@ session    optional     pam_gnome_keyring.so auto_start
 EOL
 touch /etc/security/autologin.conf
 
+# Autologin to user
+mkdir /etc/systemd/system/getty@tty1.service.d/
+cat /etc/systemd/system/getty@tty1.service.d/autologin.conf <<EOF
+[Service]
+ExecStart=
+ExecStart=-/sbin/agetty --skip-login - $TERM
+EOF
+
 # Configure sudo permissions
 echo "%wheel ALL=(ALL:ALL) ALL" >/etc/sudoers.d/00-larbs-wheel-can-sudo
 echo "%wheel ALL=(ALL:ALL) NOPASSWD: /usr/bin/shutdown,/usr/bin/reboot,/usr/bin/systemctl suspend,/usr/bin/wifi-menu,/usr/bin/mount,/usr/bin/umount,/usr/bin/pacman -Syu,/usr/bin/pacman -Syyu,/usr/bin/pacman -Syyu --noconfirm,/usr/bin/loadkeys,/usr/bin/pacman -Syyuw --noconfirm" >/etc/sudoers.d/01-larbs-cmds-without-password
@@ -346,7 +354,7 @@ setupbatterycheck
 
 # Setup Unbound with Quad9 DNS over TLS and captive portal bypass
 mkdir -p /etc/unbound/unbound.conf.d
-cat << 'EOF' > /etc/unbound/unbound.conf.d/quad9.conf
+cat <<'EOF' >/etc/unbound/unbound.conf.d/quad9.conf
 server:
     interface: 127.0.0.1
     access-control: 127.0.0.1/32 allow
@@ -382,9 +390,8 @@ server:
         forward-addr: 149.112.112.112@853#dns.quad9.net
 EOF
 
-
 # Setup NetworkManager.conf
-cat << 'EOF' >/etc/NetworkManager/NetworkManager.conf
+cat <<'EOF' >/etc/NetworkManager/NetworkManager.conf
 [main]
 dns=none
 
