@@ -29,18 +29,10 @@ Automated post-installation script for Arch Linux that installs and configures a
 - **Desktop:** Hyprland, [Ashell](https://github.com/MalpenZibo/ashell), Wofi
 - **Terminal:** Foot, Zsh with Powerlevel10k
 - **Editor:** Neovim
-- **Browser:** Qutebrowser, Firefox, Brave
-- **Media:** MPV, Mixxx, Reaper
-- **Development:** Git, Docker, VSCodium, Ansible
-- **Games:** Steam, Luanti
+- **Browser:** Brave
+- **Media:** MPV
 
 Full list in [progs.csv](progs.csv).
-
-## Requirements
-
-- Fresh Arch Linux installation
-- Internet connection
-- Run as root user
 
 ## Customization
 
