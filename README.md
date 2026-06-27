@@ -17,22 +17,30 @@ Automated post-installation script for Arch Linux that installs and configures a
 ## What it does
 
 - Creates a new user account
-- Installs 200+ packages (desktop environment, applications, development tools)
-- Configures Hyprland wayland compositor
-- Sets up my personal [dotfiles](https://github.com/sudo-Tiz/dotfilesV2)
+- Installs packages (desktop environment, applications, development tools)
+- Deploys my personal [dotfiles](https://github.com/sudo-Tiz/dotfilesV2)
 - Configures battery monitoring for laptops
 - Sets up secure DNS and network privacy
-- Set up Minecraft theme for GRUB and Plymouth
+- Sets up Minecraft theme for GRUB and Plymouth
 
-## Included Software
+## Stack
 
-- **Desktop:** Hyprland, [Ashell](https://github.com/MalpenZibo/ashell), Wofi
-- **Terminal:** Foot, Zsh with Powerlevel10k
-- **Editor:** Neovim
-- **Browser:** Brave
-- **Media:** MPV
+| Role | App |
+|------|-----|
+| Compositor | Hyprland |
+| Shell | Noctalia |
+| Terminal | Foot |
+| Editor | Neovim |
+| File manager | Yazi |
 
-Full list in [progs.csv](progs.csv).
+
+Full package list in [progs.csv](progs.csv).
+
+## Requirements
+
+- Fresh Arch Linux installation
+- Internet connection
+- Run as root
 
 ## Customization
 
@@ -43,8 +51,6 @@ Edit these variables at the top of `larbre.sh`:
 
 ## CSV Format
 
-The package list uses 3 columns:
-
 ```
 TAG,PACKAGE,DESCRIPTION
 ,firefox,"is a web browser"
@@ -52,14 +58,14 @@ A,yay,"is an AUR helper"
 G,https://github.com/user/repo.git,"is a git program"
 ```
 
-- Empty TAG = Official repository
-- `A` = AUR package
+- Empty TAG = official repo
+- `A` = AUR
 - `G` = Git repository (make install)
 
 ## Other Versions
 
-- **Xorg branch:** For X11 users, check the [xorg branch](https://github.com/sudo-Tiz/LARBRE/tree/Xorg) with my previous configuration (unmaintained)
+- **Xorg branch:** [xorg branch](https://github.com/sudo-Tiz/LARBRE/tree/Xorg) (unmaintained)
 
 ## Credits
 
-Based on [LARBS](https://github.com/LukeSmithxyz/LARBS) by Luke Smith. Special thanks to Luke for creating the original auto-rice bootstrapping concept that highly inspired this project.
+Based on [LARBS](https://github.com/LukeSmithxyz/LARBS) by Luke Smith.

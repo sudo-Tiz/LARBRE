@@ -411,7 +411,7 @@ gsettings set org.gnome.desktop.interface gtk-theme 'Adwaita-dark'
 gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
 
 # Remove powerbutton action
-sudo sed -i 's/^$HandlePowerKey=$.*/#\1/' /etc/systemd/logind.conf
+sed -i 's/^#HandlePowerKey=.*/HandlePowerKey=ignore/' /etc/systemd/login.conf
 
 # Cleanup temporary sudo permissions
 rm -f /etc/sudoers.d/larbs-temp
