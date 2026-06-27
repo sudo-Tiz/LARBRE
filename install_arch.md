@@ -154,10 +154,14 @@
         locale-gen
         echo LANG=en_US.UTF-8 > /etc/locale.conf
 
-1.  Create `/etc/vconsole.conf` and set the following variables according to your preferred language:
+1.  Create `/etc/vconsole.conf`:
 
-        KEYMAP=de_CH-latin1
-        FONT=Lat2-Terminus16
+        cat > /etc/vconsole.conf << 'EOF'
+        KEYMAP=fr
+        XKBLAYOUT=fr
+        XKBMODEL=pc105
+        XKBOPTIONS=terminate:ctrl_alt_bksp
+        EOF
 
 1.  Set hostname.
 
@@ -171,15 +175,19 @@
 
 1.  Create a user.
 
-        useradd -m -G wheel,storage,power,video,audio,input --shell /bin/bash yourusername
+        useradd -m -G wheel,storage,power,video,audio,input --shell /bin/zsh yourusername
         passwd yourusername
         sed -i 's/^# %wheel ALL=(ALL) ALL/%wheel ALL=(ALL) ALL/' /etc/sudoers
 
-1.  Configure `mkinitcpio` with modules needed to create the initramfs image.
+1.  Configure `mkinitcpio`.
+
+    Install lvm2:
 
         pacman -S lvm2
-        vim /etc/mkinitcpio.conf
-        sed -i 's/^HOOKS=($.*$filesystems$.*$)$/HOOKS=(\1encrypt lvm2 filesystems\2)/' /etc/mkinitcpio.conf
+
+    Set the hooks in `/etc/mkinitcpio.conf`:
+
+        sed -i 's/^HOOKS=.*/HOOKS=(base udev autodetect microcode modconf kms keyboard sd-vconsole block plymouth encrypt lvm2 filesystems resume fsck)/' /etc/mkinitcpio.conf
 
     Recreate the initramfs image:
 
@@ -187,22 +195,20 @@
 
 1.  Setup GRUB.
 
-          pacman -S grub efibootmgr
           grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
 
-    In `/etc/default/grub` edit the line GRUB_CMDLINE_LINUX as follows.
-    Don't forget to replace `/dev/<your-disk-luks>` with the appropriate path.
+    In `/etc/default/grub` set `GRUB_CMDLINE_LINUX` and `GRUB_CMDLINE_LINUX_DEFAULT`.
+    Replace `/dev/<your-disk-luks>` with the appropriate path (use UUID for reliability):
 
           GRUB_CMDLINE_LINUX="cryptdevice=/dev/<your-disk-luks>:cryptlvm root=/dev/vg0/root"
+          GRUB_CMDLINE_LINUX_DEFAULT="quiet splash loglevel=3"
 
     Now generate the main GRUB configuration file:
 
           grub-mkconfig -o /boot/grub/grub.cfg
 
-1.  Install `networkmanager` package and enable `NetworkManager` service
-    to ensure you have Internet connectivity after rebooting.
+1.  Enable essential services and exit.
 
-        pacman -S networkmanager
         systemctl enable NetworkManager
 
 1.  Exit new system and unmount all filesystems.
@@ -237,7 +243,7 @@ If something bad happens, you can restore the backup header:
     swapon /swapfile
     echo '/swapfile none swap defaults 0 0' | sudo tee -a /etc/fstab
 ### Set initramfs hook
-    echo 'HOOKS=(base udev autodetect microcode modconf kms keyboard keymap consolefont block plymouth encrypt filesystems resume fsck)' | sudo tee /etc/mkinitcpio.conf.d/99-hooks.conf
+    echo 'HOOKS=(base udev autodetect microcode modconf kms keyboard sd-vconsole block plymouth encrypt lvm2 filesystems resume fsck)' | sudo tee /etc/mkinitcpio.conf.d/99-hooks.conf
     sudo mkinitcpio -P
 ### Pass hibernate location to initramfs
     sudo sed -i "s|^GRUB_CMDLINE_LINUX_DEFAULT=\".*\"|GRUB_CMDLINE_LINUX_DEFAULT=\"loglevel=3 quiet splash resume=UUID=$(sudo blkid /dev/mapper/root -o value -s UUID) resume_offset=$(sudo filefrag -v /swapfile | awk '$1=="0:" {print substr($4, 1, length($4)-2)}')\"|" /etc/default/grub
@@ -258,9 +264,9 @@ If something bad happens, you can restore the backup header:
 
     sudo pacman -S virtualbox-guest-utils
 
-## Run LERBRE to install Desktop Environment
+## Run LARBRE to install Desktop Environment
 
-You can now install a Desktop Environment manually or run larbre.sh to install mine (see [dotfiles](https://github.com/sudo-Tiz/dotfiles))
+You can now install a Desktop Environment manually or run larbre.sh to install mine (see [dotfiles](https://github.com/sudo-Tiz/dotfilesV2))
 
     sudo su
     curl -LO https://raw.githubusercontent.com/sudo-Tiz/LARBRE/main/larbre.sh
