@@ -1,0 +1,117 @@
+#TAG,NAME IN REPO (or git url),PURPOSE (should be a verb phrase to sound right while installing)
+
+# Core System
+,base,"is the minimal package set for Arch Linux"
+,base-devel,"provides basic tools for building packages"
+,linux,"is the Linux kernel"
+,linux-firmware,"provides firmware files for Linux"
+,grub,"is the GNU bootloader"
+,efibootmgr,"is an EFI boot manager"
+,intel-ucode,"provides Intel processor microcode"
+
+# System
+,bash-completion,"provides programmable completion for Bash"
+,brightnessctl,"allows reading and controlling device brightness"
+,man-db,"is the manual page database"
+,pacman-contrib,"provides contributed scripts for pacman"
+,power-profiles-daemon,"is a power profile switching daemon"
+,udisks2,"is a disk management service"
+,plymouth,"is a boot splash framework"
+,hyprpolkitagent,"is the Hyprland polkit agent"
+,xdg-user-dirs,"provides user directory management"
+
+# Audio
+,pipewire,"is a low-latency audio/video server"
+,pipewire-alsa,"provides ALSA configuration for PipeWire"
+,pipewire-pulse,"is the PulseAudio replacement for PipeWire"
+,sof-firmware,"is the Sound Open Firmware"
+,wireplumber,"is the session/policy manager for PipeWire"
+
+# Thumbnails & Virtual FS
+,gvfs,"is a virtual filesystem implementation"
+,gvfs-mtp,"is the MTP backend for gvfs"
+,tumbler,"is a thumbnail service"
+
+# Fonts & Themes
+,noto-fonts,"provides Noto fonts"
+,noto-fonts-emoji,"provides emoji fonts"
+,ttf-jetbrains-mono-nerd,"is the JetBrains Mono Nerd Font"
+A,ttf-material-symbols-variable-git,"provides Material Symbols variable font"
+,papirus-icon-theme,"is an SVG icon theme"
+,adw-gtk-theme,"is a GTK theme following the Adwaita design language"
+
+# Network
+,bind,"provides DNS server and utilities"
+,iwd,"is the Internet Wireless Daemon"
+,networkmanager,"is a network connection manager"
+,unbound,"is a validating DNS resolver"
+
+# Bluetooth
+,bluez,"is the Linux Bluetooth protocol stack"
+,bluez-utils,"provides Bluetooth utilities"
+
+# Spell checking
+,hunspell-en_us,"is the English (US) dictionary for Hunspell"
+,hunspell-fr,"is the French dictionary for Hunspell"
+
+# Document rendering
+,poppler,"is a PDF rendering library"
+
+# Hyprland
+,hyprland,"is a dynamic tiling Wayland compositor"
+,hypridle,"is the Hyprland idle daemon"
+,xdg-desktop-portal-hyprland,"is the desktop portal for Hyprland"
+A,pam_autologin,"is a PAM autologin module"
+A,noctalia-shell,"is my custom Hyprland shell"
+A,noctalia-qs,"is my custom quick settings"
+
+# CLI
+,zsh,"is the Z shell"
+,zsh-autosuggestions,"provides fish-like autosuggestions for ZSH"
+A,zsh-theme-powerlevel10k-bin-git,"is the Powerlevel10k ZSH theme"
+A,yay,"is an AUR helper"
+,git,"is a distributed version control system"
+,neovim,"is a Vim-based text editor"
+,bat,"is a cat clone with syntax highlighting"
+,eza,"is a modern replacement for ls"
+,fd,"is a simple, fast alternative to find"
+,fzf,"is a command-line fuzzy finder"
+,jq,"is a JSON processor"
+,ripgrep,"is a fast grep alternative"
+,yazi,"is a terminal file manager"
+,unzip,"is an extraction utility for ZIP archives"
+,zip,"creates ZIP archives"
+,btop,"is a resource monitor"
+,fastfetch,"is a system information fetching tool"
+
+# Wayland utilities
+,foot,"is a fast, lightweight Wayland terminal emulator"
+,wl-clipboard,"provides Wayland clipboard utilities"
+,grim,"is a screenshot tool for Wayland"
+,slurp,"is a region selection tool for Wayland screenshots"
+A,grimblast-git,"is a screenshot tool for Hyprland"
+,wlsunset,"is a blue light filter for Wayland"
+,cliphist,"is a Wayland clipboard manager"
+,pulsemixer,"is a CLI/curses mixer for PulseAudio"
+,playerctl,"is a media player controller"
+,imagemagick,"is an image manipulation library"
+
+# Desktop apps
+A,brave-bin,"is a privacy-focused web browser"
+,signal-desktop,"is the Signal messenger desktop app"
+,thunderbird,"is an email client"
+,newsboat,"is an RSS/Atom feed reader"
+,mpv,"is a media player"
+,elisa,"is a music player"
+,pavucontrol,"is a PulseAudio volume control"
+,file-roller,"is an archive manager for GNOME"
+,zathura,"is a document viewer"
+,zathura-pdf-poppler,"provides PDF support for Zathura"
+,rofi,"is an application launcher"
+,rofi-rbw,"is a rofi frontend for Bitwarden"
+,thunar,"is a file manager for Xfce"
+,thunar-archive-plugin,"is an archive plugin for Thunar"
+,thunar-volman,"is the Thunar volume manager"
+,network-manager-applet,"is the NetworkManager system tray applet"
+,nm-connection-editor,"is the NetworkManager connection editor"
+,blueman,"is a GTK+ Bluetooth manager"

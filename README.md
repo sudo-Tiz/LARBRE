@@ -34,7 +34,7 @@ Automated post-installation script for Arch Linux that installs and configures a
 | File manager | Yazi |
 
 
-Full package list in [progs.csv](progs.csv).
+Full package list in [essential-progs.csv](essential-progs.csv) and [additional-progs.csv](additional-progs.csv).
 
 ## Requirements
 
@@ -47,7 +47,15 @@ Full package list in [progs.csv](progs.csv).
 Edit these variables at the top of `larbre.sh`:
 
 - `dotfilesrepo`: Your dotfiles repository
-- `progsfile`: Your package list (CSV format)
+- `progsfiles`: Newline-separated list of CSV URLs or local paths
+
+To add an extra package list (e.g. `foo.csv`) before running:
+
+```sh
+progsfiles="$progsfiles
+https://example.com/foo.csv"
+sh larbre.sh
+```
 
 ## CSV Format
 

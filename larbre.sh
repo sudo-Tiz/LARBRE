@@ -7,7 +7,8 @@
 ### OPTIONS AND VARIABLES ###
 
 dotfilesrepo="https://github.com/sudo-Tiz/dotfilesV2.git"
-progsfile="https://raw.githubusercontent.com/sudo-Tiz/LARBRE/main/progs.csv"
+progsfiles="https://raw.githubusercontent.com/sudo-Tiz/LARBRE/main/essential-progs.csv
+https://raw.githubusercontent.com/sudo-Tiz/LARBRE/main/additional-progs.csv"
 aurhelper="yay"
 repobranch="master"
 export TERM=ansi
@@ -138,8 +139,10 @@ aurinstall() {
 }
 
 installationloop() {
-  ([ -f "$progsfile" ] && cp "$progsfile" /tmp/progs.csv) ||
-    curl -Ls "$progsfile" | sed '/^#/d' >/tmp/progs.csv
+  : >/tmp/progs.csv
+  for f in $progsfiles; do
+    ([ -f "$f" ] && cat "$f" || curl -Ls "$f") | sed '/^#/d;/^[[:space:]]*$/d' >>/tmp/progs.csv
+  done
   total=$(wc -l </tmp/progs.csv)
   aurinstalled=$(pacman -Qqm)
   n=0
@@ -295,7 +298,9 @@ manualinstall $aurhelper || error "Failed to install AUR helper."
 # Make sure git AUR packages get updated
 $aurhelper -Y --save --devel
 
-# Install all packages from CSV
+# Install all packages from CSV files
+# To add extra packages, append a URL or local path to $progsfiles before running:
+#   progsfiles="$progsfiles\nhttps://example.com/foo.csv"
 installationloop
 
 # Install dotfiles
