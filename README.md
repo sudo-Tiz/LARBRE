@@ -2,6 +2,8 @@
 
 Automated post-installation script for Arch Linux that installs and configures a complete Hyprland desktop environment.
 
+![screenshot](assets/screenshot.png) 
+
 ## Quick Start
 
 1. **Install Arch Linux** (follow [install guide](install_arch.md))
