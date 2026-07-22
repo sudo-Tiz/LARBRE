@@ -357,51 +357,38 @@ echo "kernel.dmesg_restrict = 0" >/etc/sysctl.d/dmesg.conf
 # Setup battery monitoring if laptop
 setupbatterycheck
 
-# Setup Unbound with Quad9 DNS over TLS and captive portal bypass
-mkdir -p /etc/unbound/unbound.conf.d
-cat <<'EOF' >/etc/unbound/unbound.conf.d/quad9.conf
-server:
-    interface: 127.0.0.1
-    access-control: 127.0.0.1/32 allow
+# Setup dnsmasq with Quad9 and Mullvad server with DNS over TLS
+cat <<'EOF' >/etc/NetworkManager/dnsmasq.d/custom.conf
+# === DNS LOCAL ===
+listen-address=127.0.0.1
 
-    # DNS over TLS settings for Quad9
-    tls-upstream: yes
-    tls-cert-bundle: "/etc/ssl/certs/ca-certificates.crt"
+# === CACHE ===
+cache-size=1000
 
-    # DNSSEC settings (disabled for captive portal)
-    # auto-trust-anchor-file: "/var/lib/unbound/root.key"
+# === DNSSEC (optionnel) ===
+# dnssec
 
-    # Cache settings
-    msg-cache-size: 50m
-    rrset-cache-size: 100m
-    cache-min-ttl: 3600
-    cache-max-ttl: 86400
+# === PARALLELISATION ===
+dns-forward-max=500
 
-    # Performance settings
-    # num-threads: 4
-    prefetch: yes
+# === DOT (DNS over TLS) ===
+# QUAD9
+server=9.9.9.9#853 # Malware
+server=149.112.112.112#853 # Malware
+# MULLVAD
+server=194.242.2.5#853 # Ads + Trackers + Malware + Social media
+server=194.242.2.4#853 # Ads + Trackers + Malware
 
-    # Logging settings (optional)
-    log-queries: no # Set to 'yes' if you want to log queries for troubleshooting
-    log-replies: no # Set to 'yes' if you want to log replies for troubleshooting
-
-    # Local data for specific domain
-    local-data: "mabbox.bytel.fr. IN A 192.168.1.254"
-
-    forward-zone:
-        name: "."
-        forward-ssl-upstream: yes
-        forward-addr: 9.9.9.9@853#dns.quad9.net
-        forward-addr: 149.112.112.112@853#dns.quad9.net
+# === LOCAL ENTRIES ===
+address=/mabbox.bytel.fr/192.168.1.254
+address=/bonas/192.168.1.192
 EOF
 
 # Setup NetworkManager.conf
 cat <<'EOF' >/etc/NetworkManager/NetworkManager.conf
 [main]
-dns=none
-
-[global-dns-domain-*]
-servers=127.0.0.1
+dns=dnsmasq
+rc-manager=symlink
 
 [device]
 wifi.scan-rand-mac-address=yes
